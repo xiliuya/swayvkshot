@@ -18,6 +18,10 @@ Use this tool:
       局部截图
 	    take a screenshot of a part of the screen
 
+    swayvkshot -o filename.png
+      截图保存到指定文件
+	    take a screenshot of filename.png
+
     wl-copy < $(swayvkshot)
       复制到剪贴板
 	    put the output into the clipboard
