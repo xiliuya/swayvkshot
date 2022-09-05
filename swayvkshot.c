@@ -449,12 +449,15 @@ int main(int argc, char **argv) {
   // char *geometry_output = NULL;
   int ch;
   char flag_arg = 0;
+  char *png_file_name;
+  png_file_name = "";
   // int opterr = 0;
   while ((ch = getopt(argc, argv, "g:o:h")) != -1) {
-    flag_arg = 1;
+    // printf("option '%s'\n", png_file_name);
     switch (ch) {
 
     case 'g':
+      flag_arg = 1;
       // printf("option b:'%s'\n", optarg);
       char *geometry_str = NULL;
       if (strcmp(optarg, "-") == 0) {
@@ -486,26 +489,29 @@ int main(int argc, char **argv) {
 
       break;
     case 'o':
-      flag_arg = 2;
+      // flag_arg = 2;
       printf("%s\n", optarg);
+      png_file_name = optarg;
+      //printf("png_file_name '%s'\n", png_file_name);
 
-      run_screenshot(0, 0, 500, 500, 0, optarg);
+      // run_screenshot(0, 0, 500, 500, 0, optarg);
       break;
 
     default:
-      flag_arg = 3;
+      flag_arg = 8;
       printf(
           " -g \"$(slurp)\"\n	take a screenshot of a part of the screen \n"
           " -o filename.png\n	take a screenshot of filename\n"
           "wl-copy < $(swayvkshot)\n	put the output into the clipboard \n");
     }
   }
+  //printf("%d\n", flag_arg);
   if (flag_arg == 0) {
-    run_screenshot(0, 0, 500, 500, flag_arg, "");
+    run_screenshot(0, 0, 500, 500, flag_arg, png_file_name);
     // printf("%d\n", buffer.width);
   } else if (flag_arg == 1) {
     run_screenshot(geometry->x, geometry->y, geometry->width, geometry->height,
-                   flag_arg, "");
+                   flag_arg, png_file_name);
   }
   // printf("optopt +%c\n", optopt);
 }
